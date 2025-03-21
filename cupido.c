@@ -16,7 +16,7 @@ int esCompatible(persona a, persona b);
 void personasSolas(persona array[], int n);
 
 int main()
-{
+{   
     int max_personas = 10;
 
     persona array[10] = {
@@ -31,7 +31,7 @@ int main()
         {"Luis", "Fernandez", 19, "Rosario", 0},
         {"Ana", "Perez", 21, "Rosario", 0}
     };
-
+    
     return 0;
 }
 
