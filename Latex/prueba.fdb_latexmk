@@ -1,0 +1,25 @@
+# Fdb version 4
+["pdflatex"] 1742605580.91355 "/home/nicolas/Escritorio/repositorio/Latex/prueba.tex" "prueba.pdf" "prueba" 1742605581.65058 0
+  "/etc/texmf/web2c/texmf.cnf" 1742604534.61896 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/nicolas/Escritorio/repositorio/Latex/prueba.tex" 1742605580.61649 166 4b228522a6eee735b3f65cc00db5faf8 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel-spanish/spanish.ldf" 1622145181 26965 3b6d1655ad716f98e788b1fb9f2e87b8 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty" 1704662920 150008 7a05b0fdc0167c04e192003e780ab195 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/locale/es/babel-es.ini" 1663444672 4345 33a8cc6f0a7c6afcb84895b2c963a4e5 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/locale/es/babel-spanish.tex" 1498512262 336 a1c472f674f6f0c25a2c95ad8c7ad024 ""
+  "/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def" 1704662920 6948 df63e25be1d2bc35bbad5a0141f41348 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1705352648 20144 147463a6a579f4597269ef9565205cfe ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty" 1705352648 5048 425739d70251273bf93e3d51f3c40048 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1705352648 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1704491087 30006 57b07afb710ee2f649c65cfbafda39c1 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1742604585.38781 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1742604844 8212845 f1a146408059eb417cd4c48e8545de31 ""
+  "prueba.aux" 1742605581.5795 194 72658fb03bfd53fc103956ba2036b889 "pdflatex"
+  "prueba.tex" 1742605580.61649 166 4b228522a6eee735b3f65cc00db5faf8 ""
+  (generated)
+  "prueba.aux"
+  "prueba.log"
+  "prueba.pdf"
+  (rewritten before read)
