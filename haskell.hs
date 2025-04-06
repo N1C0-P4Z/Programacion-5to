@@ -58,5 +58,9 @@ existe n (Literal m)  = n == m
 existe n (Suma e1 e2) = existe n e1 || existe n e2
 existe n (Resta e1 e2) = existe n e1 || existe n e2
 
+fib' :: Int -> Int
+fib' 0 = 0
+fib' 1 = 1
+fib' x = fib' (x - 1) + fib' (x - 2)
 
 
