@@ -15,6 +15,7 @@ int main(){
 		return 1;
 	}
 	if(lectura & 1<<30){
+
 		printf("error");
 		return 2;
 	}
