@@ -18,8 +18,8 @@ int main(void)
     scanf("%d", &dato);
 
     instrumentoA(dato);
-    everestB(dato);
-    fallaC(dato);
+    /*everestB(dato);*/
+    /*fallaC(dato);*/
     
     return 0;
 }
