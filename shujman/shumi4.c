@@ -47,17 +47,4 @@ void asciiAHexa(char *ascii){
 		printf("%c%c", prim, sec);
 	}
 }
-void imprimirBinario(char binary){
-		for(unsigned int m=1<<7; m; m >>= 1) 
-		printf("%i",(binary&m)/m);
-		printf("\n");
-}
 
-int elem(int n, char a, char array[n]){
-	for(int i = 0; i<n;i++){
-		if(a == array[i]){
-			return 1;
-		}
-	}
-	return 0;
-}
