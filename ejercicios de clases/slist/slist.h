@@ -28,11 +28,12 @@ typedef SNodo* SList;
  */
 SList slist_crear();
 
+int sList_length(SList lista);
 /**
  * Destruccion de la lista.
  */
 void slist_destruir(SList lista);
-
+SList slist_destruirUnNodo(SList lista, int numNodo); 
 /**
  * Determina si la lista es vacía.
  */

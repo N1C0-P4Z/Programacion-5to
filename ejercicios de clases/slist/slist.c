@@ -12,7 +12,27 @@ void slist_destruir(SList lista) {
     free(nodo_a_eliminar);
   }
 }
+int sList_length(SList lista){
+  int i;
+  for(i = 0; lista->sig != NULL; i++){
+      lista = lista->sig;
+  }
+  return i;
+}
+SList slist_destruirUnNodo(SList lista, int numNodo) {
+  SNodo *nodo_a_eliminar;
+  SList temp = lista;
+  if(lista != NULL && numNodo>=0 && numNodo < sList_length(lista)){
+    for ( int i = 0; i < numNodo-1; i++){
+      temp = temp->sig;
+    }
+    nodo_a_eliminar = temp->sig;
+    temp->sig = temp->sig->sig;
+    free(nodo_a_eliminar);
+  }
+  return lista;
 
+}
 int slist_vacia(SList lista) {
   return lista == NULL;
 }
