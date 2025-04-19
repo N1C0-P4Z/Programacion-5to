@@ -9,7 +9,7 @@ int main (void)
 {   
     unsigned int dato;
 
-    printf("Ingrese un entero que indique el estado de las 8 bombas: \n");
+    printf("Ingrese un entero que indique el estado de las 8 bombas: ");
     scanf("%d", &dato);
 
     int opcion;

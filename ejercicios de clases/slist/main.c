@@ -18,8 +18,18 @@ int main() {
   slist_agregar_inicio_alt(&lista, 1);
   slist_agregar_final_alt(&lista, 7);
   lista = slist_agregar_final_R(lista, 8);
-
   slist_recorrer(lista, imprimir_entero);
+  printf("\n");
+  printf("%i", sList_length(lista));
+  printf("\n");
+  lista = slist_destruirUnNodo(lista, 9);
+  slist_recorrer(lista, imprimir_entero);
+  printf("\n");
+  printf("%i", sList_length(lista));
+  printf("\n");
+  SList lista1 = slist_crear(); 
+  slist_recorrer(lista1, imprimir_entero);
+  lista1 = slist_destruirUnNodo(lista1, 0);
   puts("");
 
   slist_destruir(lista);

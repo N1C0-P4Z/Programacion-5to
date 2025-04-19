@@ -12,6 +12,7 @@ void slist_destruir(SList lista) {
     free(nodo_a_eliminar);
   }
 }
+// ej 1. 
 int sList_length(SList lista){
   int i;
   for(i = 0; lista->sig != NULL; i++){
@@ -19,9 +20,14 @@ int sList_length(SList lista){
   }
   return i;
 }
+//jijo
 SList slist_destruirUnNodo(SList lista, int numNodo) {
   SNodo *nodo_a_eliminar;
   SList temp = lista;
+  if(sList_length(lista)==1){
+	slist_destruir(lista);
+	return lista;
+  }
   if(lista != NULL && numNodo>=0 && numNodo < sList_length(lista)){
     for ( int i = 0; i < numNodo-1; i++){
       temp = temp->sig;
@@ -32,6 +38,15 @@ SList slist_destruirUnNodo(SList lista, int numNodo) {
   }
   return lista;
 
+}
+SList slist_agregar_arbitraria(SList lista, SNodo nuevo, int posicion){
+    
+}
+void concatenarListas(SList primera, SList segunda){
+    SList nodoTemp = primera;
+    for(; nodoTemp->sig != NULL;nodoTemp=nodoTemp->sig);
+    nodoTemp->sig = segunda;
+    
 }
 int slist_vacia(SList lista) {
   return lista == NULL;
@@ -52,7 +67,6 @@ SList slist_agregar_final(SList lista, int dato) {
   nodo_temp->sig = nuevo_nodo;
   return lista;
 }
-
 void slist_agregar_final_alt(SNodo** lista, int dato) {
   SNodo *nuevo_nodo = malloc(sizeof(SNodo));
   nuevo_nodo->dato = dato;
