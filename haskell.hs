@@ -64,3 +64,18 @@ fib' :: Int -> Int
 fib' 0 = 0
 fib' 1 = 1
 fib' x = fib' (x - 1) + fib' (x - 2)
+
+-- practica Folds
+-- r deberia ser List b
+mapList :: (a -> b) -> List a -> List b
+mapList f la = foldList(\a lb -> Cons (f a) lb) Nil la
+-- si estan la en los 2 lados, se puede sacar
+--(usar Foldlist :: (a -> r -> r) -> r -> List a -> r)
+
+foldList :: (a -> r -> r) -> r -> List a -> r
+foldList f b Nil = b
+foldList f b (Cons a l) = f a (foldList f b l)
+
+-- 5
+natSize :: List a -> Nat
+natSize t = foldList (Zero) (\_ n -> Succ n)
