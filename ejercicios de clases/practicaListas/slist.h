@@ -32,6 +32,6 @@ SList slist_agregar_final_R(SList lista, int dato);
 SList slist_agregar_inicio(SList lista, int dato);
 
 void slist_agregar_inicio_alt(SNodo** lista, int dato);
-
+void concatenarListas(SList primera, SList segunda);
 void slist_recorrer(SList lista, FuncionVisitante visit);
 #endif
