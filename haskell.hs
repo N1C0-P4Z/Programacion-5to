@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleInstances #-}
+
 -- 1
 data Mes = Enero | Febrero | Marzo | Abril | Mayo | Junio | Julio | Agosto | Septiembre | Octubre | Noviembre | Diciembre deriving (Show)
 
@@ -43,7 +45,7 @@ nat2int Zero = 0
 nat2int (Succ n) = 1 + nat2int n
 
 -- 8
-data List a = Nil | Cons a (List a)
+data List a = Nil | Cons a (List a) deriving (Show)
 
 sumar :: List Int -> Int
 sumar Nil = 0
@@ -53,7 +55,13 @@ sumar (Cons a as) = a + sumar as
 
 -- 11
 
-data Expr = Literal Int | Suma Expr Expr | Resta Expr Expr
+data Expr = Literal Int | Suma Expr Expr | Resta Expr Expr deriving (Show)
+
+-- para el 8
+foldExpr :: (r -> r -> r) -> (r -> r -> r) -> (Int -> r) -> Expr -> r
+foldExpr s r l (Literal n) = l n
+foldExpr s r l (Suma e1 e2) = s (foldExpr s r l e1) (foldExpr s r l e2)
+foldExpr s r l (Resta e1 e2) = r (foldExpr s r l e1) (foldExpr s r l e2)
 
 existe :: Int -> Expr -> Bool
 existe n (Literal m) = n == m
@@ -68,14 +76,36 @@ fib' x = fib' (x - 1) + fib' (x - 2)
 -- practica Folds
 -- r deberia ser List b
 mapList :: (a -> b) -> List a -> List b
-mapList f la = foldList(\a lb -> Cons (f a) lb) Nil la
+mapList f la = foldList (\a lb -> Cons (f a) lb) Nil la
+
 -- si estan la en los 2 lados, se puede sacar
---(usar Foldlist :: (a -> r -> r) -> r -> List a -> r)
+-- (usar Foldlist :: (a -> r -> r) -> r -> List a -> r)
 
 foldList :: (a -> r -> r) -> r -> List a -> r
 foldList f b Nil = b
 foldList f b (Cons a l) = f a (foldList f b l)
 
 -- 5
+-- data List a = Nil | Cons a (List a)
 natSize :: List a -> Nat
-natSize t = foldList (Zero) (\_ n -> Succ n)
+natSize = foldList (\_ n -> Succ n) Zero
+
+-- 6
+dup :: List a -> List a
+dup = foldList (\x y -> Cons x (Cons x y)) Nil
+
+-- 7
+zipdup :: List a -> List (a, a)
+zipdup = foldList (\x y -> Cons (x, x) y) Nil
+
+-- 8
+concatList :: List a -> List a -> List a
+concatList i d = foldList Cons d i
+
+flatenExpr :: Expr -> List Int
+flatenExpr = foldExpr concatList concatList (\x -> Cons x Nil)
+
+-- 9
+
+maxNumber :: Expr -> Int
+maxNumber e = foldExpr (\x y -> if x > y then x else y) (\x y -> if x > y then x else y) (\x -> x) e
