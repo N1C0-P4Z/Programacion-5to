@@ -39,8 +39,30 @@ SList slist_destruirUnNodo(SList lista, int numNodo) {
   return lista;
 
 }
-SList slist_agregar_arbitraria(SList lista, SNodo nuevo, int posicion){
-    
+SList slist_agregar_arbitraria(SList lista, int nuevo, int posicion){
+  SNodo *nodo_a_agregar = malloc(sizeof(SNodo));
+  nodo_a_agregar->dato = nuevo;
+  nodo_a_agregar->sig = NULL;
+  SList temp = lista;
+  if(lista == NULL){
+	return nodo_a_agregar;
+  }
+  if(posicion == 0){
+    return slist_agregar_inicio(temp, nuevo);
+  }
+  if(posicion>0 && posicion < sList_length(lista)){
+    for ( int i = 0; i < posicion-1; i++){
+      temp = temp->sig;
+    }
+  }else{
+    slist_agregar_final(temp, nuevo);
+  }
+  
+  nodo_a_agregar->sig  = temp->sig;
+  temp->sig = nodo_a_agregar;
+
+  return lista;
+     
 }
 void concatenarListas(SList primera, SList segunda){
     SList nodoTemp = primera;

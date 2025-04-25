@@ -25,6 +25,8 @@ int slist_vacia(SList lista);
 
 SList slist_agregar_final(SList lista, int dato);
 
+SList slist_agregar_arbitraria(SList lista, int nuevo, int posicion);
+
 void slist_agregar_final_alt(SNodo** lista, int dato);
 
 SList slist_agregar_final_R(SList lista, int dato);

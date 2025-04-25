@@ -3,7 +3,7 @@ static void imprimir_entero(int dato){
 	printf("%d ", dato);
 }
 int main(){
-	printf("ejercicio 1 ");
+	printf("ejercicio 1 \n");
 	SList primera = slist_crear();
 
 	primera = slist_agregar_inicio(primera, 5);
@@ -18,9 +18,12 @@ int main(){
 	segunda = slist_agregar_inicio(segunda, 8);
 	segunda = slist_agregar_final(segunda, 7);
 
-	concatenarListas(primera, segunda);
+	/*concatenarListas(primera, segunda);*/
+	/*slist_recorrer(primera, imprimir_entero);*/
+	/*printf("\n");*/
+	/*slist_recorrer(segunda, imprimir_entero);*/
+
+	primera = slist_agregar_arbitraria(primera, 3, 6);
 	slist_recorrer(primera, imprimir_entero);
-	printf("\n");
-	slist_recorrer(segunda, imprimir_entero);
 	return 0;
 }
