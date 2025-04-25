@@ -109,3 +109,22 @@ flatenExpr = foldExpr concatList concatList (\x -> Cons x Nil)
 
 maxNumber :: Expr -> Int
 maxNumber e = foldExpr (\x y -> if x > y then x else y) (\x y -> if x > y then x else y) (\x -> x) e
+
+foldnat :: (r -> r) -> r -> Nat -> r
+foldnat f a Zero = a
+foldnat f a (Succ b) = f (foldnat f a b)
+
+evaluarNat :: Nat -> Int
+evaluarNat x = foldnat (1 +) 0 x
+
+-- 10
+repeat2 :: a -> Nat -> List a
+repeat2 x nat = foldnat (\y -> Cons x y) Nil nat
+
+-- 11
+
+mapListA :: (a -> b) -> List a -> List b
+mapListA f list = foldList (\a b -> Cons (f a) b) Nil list
+
+filterList :: (a -> Bool) -> List a -> List a
+filterList f list = foldList (\a b -> if (f a) then Cons a b else b) Nil list
