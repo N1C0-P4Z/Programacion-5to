@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+import Data.Time.Format.ISO8601 (yearFormat)
 
 --1
 data Mes = Enero | Febrero | Marzo | Abril | Mayo | Junio | Julio | Agosto | Septiembre | Octubre | Noviembre | Diciembre deriving (Show)
@@ -243,3 +244,132 @@ foldFib f e (FStep (x,y) fibnext) = f x y (foldFib f e fibnext)
 
 --16
 
+
+-- Clases e Instancias 
+
+--1
+
+iguales :: Eq a => a -> a -> Bool
+iguales x y = not (x /= y)
+
+desiguales :: Eq a => a -> a -> Bool
+desiguales x y = not (x == y)
+
+--2
+
+numEqual :: Eq a => a -> [a] -> Int
+numEqual k [] = 0
+numEqual k (x:xs) = if (k == x) then 1 + numEqual k xs else numEqual k xs
+
+--3
+
+--4
+
+--5
+
+class Visible a where
+    toString :: a -> String
+    size     :: a -> Int
+
+cmp :: Visible a => a -> a -> Bool
+cmp x y = size x <= size y
+
+--6
+
+compareOrd :: Ord a => a -> a -> Ordering
+compareOrd x y
+    | x <= y && y <= x = EQ
+    | x <= y && not (y <= x) = LT
+    | otherwise = GT
+
+menorOrd :: Ord a => a -> a -> Bool
+menorOrd x y  = (compareOrd x y) == LT
+
+menoroigualOrd :: Ord a => a -> a -> Bool
+menoroigualOrd x y = (compareOrd x y) == LT || (compareOrd x y) == EQ
+
+mayorOrd :: Ord a => a -> a -> Bool
+mayorOrd x y = (compareOrd x y) == GT
+
+mayoroigualOrd :: Ord a => a -> a -> Bool
+mayoroigualOrd x y = (compareOrd x y) == GT || (compareOrd x y) == EQ
+
+maxOrd :: Ord a => a -> a -> a
+maxOrd x y
+    |x <= y = y
+    |otherwise = x
+
+minOrd :: Ord a => a -> a -> a
+minOrd x y
+    |x <= y = x
+    |otherwise = y
+
+
+--7 da error porque ya se definio en el preludio de haskell
+--instance Ord a => Ord [a] where 
+--    [] <= _ = True
+--    _ <= [] = False
+--    (x:xs) <= (y:ys) 
+--        |x < y = True
+--        |x > y = False
+--        |otherwise = xs <= ys
+ 
+--9
+
+instance Eq a => Eq (Bool -> a) where
+    (==) :: Eq a => (Bool -> a) -> (Bool -> a) -> Bool
+    f == g = f True == g True && f False == g False
+
+eqdeNot :: Bool
+eqdeNot = not == not
+
+eqdeId :: Bool
+eqdeId = id == (id :: Bool -> Bool)
+
+eqdeAnd :: Bool
+eqdeAnd = (&&) == (&&)
+
+eqdeOr :: Bool
+eqdeOr = (||) == (||)
+
+--10
+
+class Geometrico figura where
+    perimetro' :: figura -> Float
+    area' :: figura -> Float
+
+data Punto = Punto Float Float deriving (Show)
+
+instance Geometrico Punto where
+    perimetro' :: Punto -> Float
+    perimetro' _ = 0
+    area' :: Punto -> Float
+    area' _ = 0
+
+data Linea = Linea Punto Punto deriving (Show)
+
+instance Geometrico Linea where
+    perimetro' :: Linea -> Float
+    perimetro' (Linea (Punto x1 y1) (Punto x2 y2)) = sqrt ((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+    area' :: Linea -> Float
+    area' _ = 0
+
+--data Forma = Circulo Float | Rectangulo Float Float | Triangulo Float Float Float deriving (Show)
+
+
+instance Geometrico Forma where
+    perimetro' :: Forma -> Float
+    perimetro' (Circulo r) = 3.14 * r * 2
+    perimetro' (Rectangulo l1 l2) = 2 * (l1 + l2)
+    perimetro' (Triangulo l1 l2 l3) = l1 + l2 + l3
+    area' :: Forma -> Float
+    area' (Circulo r) = 3.14 * r ^ 2
+    area' (Rectangulo l1 l2 ) = l1 * l2
+    area' (Triangulo l1 l2 l3) = let semiperimetro = (l1 + l2 + l3) / 2
+                                 in sqrt (semiperimetro * (semiperimetro - l1) * (semiperimetro - l2) * (semiperimetro - l3))
+
+dimension :: Geometrico f => f -> Int
+dimension f
+    |perimetro' f == 0 && area' f == 0 = 0
+    |area' f == 0 = 1
+    |otherwise = 2    
