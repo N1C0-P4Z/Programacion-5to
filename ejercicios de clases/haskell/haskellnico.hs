@@ -206,4 +206,40 @@ foldTraza i d a n (Izquierda x) = i (foldTraza i d a n x)
 foldTraza i d a n (Derecha x) = d (foldTraza i d a n x)
 foldTraza i d a n (Adelante x) = a (foldTraza i d a n x)
 
+--13
+
+flattenList :: List (List a) -> List a
+flattenList list = foldList concatenar Nil list
+
+listasListas :: List (List Int)
+listasListas = Cons (Cons 1 (Cons 2 Nil))
+                    (Cons (Cons 3 (Cons 4 Nil))
+                          (Cons (Cons 5 (Cons 6 Nil))Nil))
+
+resultado :: List Int
+resultado = flattenList listasListas
+
+--14
+
+listafib :: [(Int,Int)] -> Bool
+listafib fib = let (_,_,x) = listaFib fib in x
+    where
+        listaFib = foldl next init
+        next (a,b,x) (c,d) = let isFib = x && b == c && d == a + b in (c,d,isFib)
+        init = (0,1,True)
+
+
+-- ????? no me anduvo 
+
+--15
+
+data Fib = FStep (Int, Int) Fib | FEmpty deriving (Show)
+
+
+foldFib :: (Int -> Int -> r -> r) -> r -> Fib -> r
+foldFib _ e FEmpty = e
+foldFib f e (FStep (x,y) fibnext) = f x y (foldFib f e fibnext)
+
+
+--16
 
