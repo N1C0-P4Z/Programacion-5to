@@ -162,4 +162,48 @@ natSize l = foldList (\a x -> Succ x) Zero l
 
 --6
 
---dup :: List a -> List a
+dup :: List a -> List a
+dup l = foldList (\ x y -> Cons x (Cons x y)) Nil l
+
+--7
+
+zipdup :: List a -> List (a,a)
+zipdup = foldList (\x l -> Cons (x , x) l) Nil
+
+--8
+
+concatenar :: List a -> List a -> List a
+concatenar l1 l2 = foldList (\x l -> (Cons x)l) l2 l1
+
+flattenExpr :: Expr -> List Int
+flattenExpr expr = foldExpr concatenar concatenar (\x -> Cons x Nil) expr
+
+--9
+
+maxNumber :: Expr -> Int
+maxNumber expr = foldExpr max max id expr
+
+--10
+
+repeat' :: a -> Nat -> List a
+repeat' n l = foldNat (\x -> Cons n x) Nil l
+
+--11
+
+mapList :: (a -> b) -> List a -> List b
+mapList f l = foldList (\x y -> Cons (f x) y) Nil l
+
+filterList :: (a -> Bool) -> List a -> List a
+filterList f list = foldList (\ x y -> if (f x) then Cons x y else y) Nil list
+
+--12 
+
+data Traza = Izquierda Traza | Derecha Traza | Adelante Traza | Nothing' deriving (Show)
+
+foldTraza :: (r -> r) -> (r -> r) -> (r -> r) -> r -> Traza -> r
+foldTraza i d a n Nothing'  = n
+foldTraza i d a n (Izquierda x) = i (foldTraza i d a n x)
+foldTraza i d a n (Derecha x) = d (foldTraza i d a n x)
+foldTraza i d a n (Adelante x) = a (foldTraza i d a n x)
+
+
