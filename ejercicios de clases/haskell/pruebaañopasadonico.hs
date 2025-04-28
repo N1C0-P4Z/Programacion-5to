@@ -65,4 +65,65 @@ instance Bolsa List where
 
 --4
 
-fun :: Ord r => (a -> r) a -> r -> r -> r
+fun :: Ord r => (a -> r) -> a -> r -> r -> r
+fun g a s d 
+    |g a == s = s 
+    |g a < s = g a 
+    |otherwise = d
+
+-- PRUEBA RECUPEARATORIO: TIPOS ALGEBRAICOS; FOLDS Y CLASES
+
+--1
+
+--a
+
+data CType = CInt | CPtr CType deriving (Show)
+
+--b
+
+-- **int :: CType
+-- **int = CPtr (CPtr CInt)
+
+--c
+
+foldCType :: (r -> r) -> r -> CType  -> r
+foldCType ptr entero (CInt) = entero
+foldCType ptr entero (CPtr x) = ptr (foldCType ptr entero x) 
+
+--d
+
+accesosRAM :: CType -> Int
+accesosRAM l = foldCType (\ x -> x + 1) 0 l 
+
+--2
+--a
+
+data Nat = Zero | Succ Nat deriving (Show)
+
+
+foldNat :: r -> (r -> r) -> Nat -> r
+foldNat z su (Zero) = z
+foldNat z su (Succ x) = su (foldNat z su x)
+
+class Enum' a where
+    succ'        :: a -> a
+    toEnum'      :: Int -> a
+    fromEnum    :: a -> Int
+
+instance Enum' Nat where
+    succ' :: Nat -> Nat
+    succ' x = (Succ x) 
+    toEnum' :: Int -> Nat
+    toEnum' 0 = Zero
+    toEnum' x = Succ (toEnum' x) 
+    fromEnum :: Nat -> Int
+    fromEnum x = foldNat 0 (+ 1) x
+
+--b
+
+enumFrom' :: Enum' a => a -> [a]
+enumFrom' nro = nro : enumFrom' (succ' nro)
+
+--4
+fun' :: (Eq a, Eq b) => a -> b -> b -> b -> Bool
+fun' t s b c = t == s || b == c
