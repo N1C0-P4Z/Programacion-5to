@@ -21,5 +21,7 @@ int pila_tope(Pila* pila);
 void pila_apilar(Pila* pila, int num);
 void pila_desapilar(Pila * pila);
 void pila_imprimir(Pila * pila);
+void pila_destruir(Pila* pila);
+
 #endif
  
