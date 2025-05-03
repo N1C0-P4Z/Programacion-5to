@@ -125,5 +125,7 @@ enumFrom' :: Enum' a => a -> [a]
 enumFrom' nro = nro : enumFrom' (succ' nro)
 
 --4
-fun' :: (Eq a, Eq b) => a -> b -> b -> b -> Bool
+fun' :: (Eq a, Eq b) => a -> a -> b -> b -> Bool
 fun' t s b c = t == s || b == c
+
+
