@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "slist.h"
 
 #define MAX_PILA 5
 
@@ -13,7 +12,6 @@ typedef struct _Pila{
 	int datos[MAX_PILA];
 	int ultimo;
 }Pila;
-
 
 Pila *pila_crear();
 int pila_es_vacia(Pila* pila);
