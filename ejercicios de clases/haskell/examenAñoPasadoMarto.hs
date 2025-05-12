@@ -11,6 +11,9 @@ foldList :: (a -> r -> r) -> r -> List a -> r
 foldList f b Nil = b
 foldList f b (Cons a xs) = f a (foldList f b xs)
 
+reverseMarto :: List a -> List a
+reverseMarto (Cons x xs) = (\a acc -> foldList Cons (Cons x Nil) acc) (Cons x Nil) xs
+
 reverseList :: List a -> List a
 reverseList xs = foldList (\x xs' -> xs' `snoc` x) Nil xs
 
