@@ -5,12 +5,12 @@ Pila *pila_crear(){
 	nueva->ultimo = -1;
 	return nueva;
 }
-int pila_es_vacia(Pila* pila){
-	if (pila->ultimo == -1){
-		return 1;
-	}
-	return 0;
-}
+/*int pila_es_vacia(Pila* pila){*/
+/*	if (pila->ultimo == -1){*/
+/*		return 1;*/
+/*	}*/
+/*	return 0;*/
+/*}*/
 
 int pila_tope(Pila* pila){
 	if(pila->ultimo != -1){
