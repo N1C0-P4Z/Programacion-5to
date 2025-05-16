@@ -4,7 +4,7 @@ Cantidad de enemigos: 20
 Vida inicial: 9
 Cantidad de torres: 3
 Distancia de ataque: 1
-Largo camino: 11
+Largo camino: 12
 CCVBB
 VCVBB
 VCVBB
