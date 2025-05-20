@@ -69,8 +69,9 @@ int simular_nivel(Nivel *nivel, Mapa *mapa, DisposicionTorres colocar_torres) {
 
     for (int i = 0; i < mapa->cant_torres; i++) {
         nro_ataques_efectivos += calcular_posiciones(mapa->torres[i], posiciones_ataque, nro_ataques_efectivos, mapa->ancho, mapa->alto, mapa->distancia_ataque);
+        //nro ataques efectivo = cantidad de casillas atacadas por torres, dentro del mapa, sin importar que tipo de casilla es.
     }
-        
+
     int escape = 0;
     for (int turno = 0; nivel->enemigos->cantidad_activos && !escape; turno++) {
         mostrar_mapa(mapa, nivel->enemigos);
@@ -78,7 +79,7 @@ int simular_nivel(Nivel *nivel, Mapa *mapa, DisposicionTorres colocar_torres) {
         escape += simular_turno(mapa, nivel, posiciones_ataque, nro_ataques_efectivos);
         sleep(1);
     }
-
+    // 1 -> ganaste, 0 perdiste.
     return !(nivel->enemigos->cantidad_activos);
 }
 
@@ -134,7 +135,7 @@ int main() {
     srand(time(NULL));
     DisposicionTorres estrategia_actual = disponer;
     char ruta_nivel_actual[MAX_LINEA];
-    strcpy(ruta_nivel_actual, "Levels/nivel01.txt");
+    strcpy(ruta_nivel_actual, "Levels/nivel11.txt");
 
     Nivel *nivel = NULL;
     Mapa *mapa = NULL;
