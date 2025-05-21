@@ -89,6 +89,7 @@ static void imprimir_borde_horizontal(int ancho, int top) {
 
 void mostrar_mapa(Mapa *mapa, Enemigos *enemigos) {
 
+    limpiar_pantalla();
     imprimir_borde_horizontal(mapa->ancho, 1);
 
     for (int x = 0; x < mapa->alto; x++) {
