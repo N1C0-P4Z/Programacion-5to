@@ -3,7 +3,6 @@
 
 #include "mapa.h"
 #include "estrategia.h"
-
 int simular_turno(Mapa *mapa, Nivel *nivel, Coordenada*, int);
 
 int buscarEnemigo(Coordenada*, int, Coordenada);

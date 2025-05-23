@@ -3,7 +3,6 @@
 
 #include "mapa.h"
 #include "nivel.h"
-#include "simulador.h"
 
 typedef void (*DisposicionTorres)(Nivel*, Mapa*);
 

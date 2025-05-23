@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "pila.h")
 
 Pila *pila_crear(){
 	Pila *nueva = malloc(sizeof(Pila));
@@ -12,17 +12,20 @@ int pila_es_vacia(Pila* pila){
 	return 0;
 }
 
-int pila_tope(Pila* pila){
+Coordenada pila_tope(Pila* pila){
 	if(pila->ultimo != -1){
 		return pila->datos[pila->ultimo];
 	}
-	return -1;
+        Coordenada vacia;
+        vacia.x = -1;
+        vacia.y = -1;
+	return vacia;
 }
-void pila_apilar(Pila* pila, int num){
+void pila_apilar(Pila* pila, Coordenada num){
 	if(pila->ultimo >= MAX_PILA-1){
 		printf("error\n");
 	}else{
-		pila->datos[pila->ultimo+1] = num;
+		copiar_coordenada(&pila->datos[pila->ultimo+1], &num);
 		pila->ultimo++;
 	}
 }
@@ -32,7 +35,7 @@ void pila_desapilar(Pila * pila){
 
 void pila_imprimir(Pila * pila){
 	for(int i = 0; i<=pila->ultimo; i++){
-		printf("%i\n", pila->datos[i]);
+		printf("x: %i y: %i\n", pila->datos[i].x, pila->datos[i].y);
 	}
 }
 
@@ -40,3 +43,7 @@ void pila_destruir(Pila * pila){
 	free(pila);
 }
 
+void copiar_coordenada(Coordenada *primera, Coordenada *segunda){
+    primera->x = segunda->y;
+    primera->y = segunda->y;
+}
