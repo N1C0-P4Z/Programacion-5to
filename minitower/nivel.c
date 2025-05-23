@@ -72,3 +72,30 @@ void liberar_nivel(Nivel *nivel) {
     liberar_enemigos(nivel->enemigos);
     free(nivel);
 }
+Nivel copiar_nivel(Nivel original) {
+    Nivel copia;
+
+    // Copiar enemigos
+    copia.enemigos = malloc(sizeof(Enemigos));
+    *copia.enemigos = *original.enemigos;
+
+    int cant = original.enemigos->cantidad;
+
+    copia.enemigos->posiciones = malloc(cant * sizeof(Coordenada));
+    memcpy(copia.enemigos->posiciones, original.enemigos->posiciones, cant * sizeof(Coordenada));
+
+    copia.enemigos->vida = malloc(cant * sizeof(int));
+    memcpy(copia.enemigos->vida, original.enemigos->vida, cant * sizeof(int));
+
+    copia.enemigos->activos = malloc(cant * sizeof(int));
+    memcpy(copia.enemigos->activos, original.enemigos->activos, cant * sizeof(int));
+
+    // Copiar camino
+    copia.camino = malloc(sizeof(Camino));
+    *copia.camino = *original.camino;
+
+    copia.camino->posiciones = malloc(original.camino->largo_camino * sizeof(Coordenada));
+    memcpy(copia.camino->posiciones, original.camino->posiciones, original.camino->largo_camino * sizeof(Coordenada));
+
+    return copia;
+}

@@ -27,4 +27,5 @@ void liberar_mapa(Mapa *mapa);
 
 void limpiar_pantalla();
 
+Mapa copiar_mapa(Mapa original); 
 #endif

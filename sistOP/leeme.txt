@@ -1,0 +1,7 @@
+Joaquin,25,Computologo
+Catalina,26,Telecomunicaciones
+Katherine,24,Letras
+Matias,24,Matematicos
+Mauricio,24,Estadistica
+Benjamin,24,Vendedor agropecuario
+Juan Ignacio,25,Administrador de sistemas

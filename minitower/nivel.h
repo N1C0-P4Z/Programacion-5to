@@ -3,7 +3,7 @@
 
 #include "stdlib.h"
 #include "stdio.h"
-
+#include <string.h>
 typedef struct {
     int x, y;
 } Coordenada;
@@ -31,5 +31,5 @@ void mostrar_nivel(Nivel *info);
 void mostrar_enemigos(Enemigos *enemigos);
 
 void liberar_nivel(Nivel*);
-
+Nivel copiar_nivel(Nivel original); 
 #endif

@@ -12,5 +12,6 @@
 #include <string.h>
 #include <time.h>
 
+int simular_todos_caminos(Nivel nivel, Mapa mapa);
 
 #endif

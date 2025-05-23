@@ -1,5 +1,8 @@
 #include "simulador.h"
 #include "estrategia.h"
+#include "mapa.h"
+#include "nivel.h"
+#include "turno.h"
 
 void inicializar_simulacion(const char* filename, Nivel** nivel, Mapa **mapa) {
     FILE* f = fopen(filename, "r");
@@ -82,6 +85,45 @@ int simular_nivel(Nivel *nivel, Mapa *mapa, DisposicionTorres colocar_torres) {
     // 1 -> ganaste, 0 perdiste.
     return !(nivel->enemigos->cantidad_activos);
 }
+int simular_todos_caminos(Nivel nivel, Mapa mapa){
+    int nro_ataques = mapa.cant_torres * area_ataque(mapa.distancia_ataque);
+    Coordenada posiciones_ataque[nro_ataques];
+    int nro_ataques_efectivos = 0;
+
+    for (int i = 0; i < mapa.cant_torres; i++) {
+        nro_ataques_efectivos += calcular_posiciones(mapa.torres[i], posiciones_ataque, nro_ataques_efectivos, mapa.ancho, mapa.alto, mapa.distancia_ataque);
+        //nro ataques efectivo = cantidad de casillas atacadas por torres, dentro del mapa, sin importar que tipo de casilla es.
+    }   
+    int count = 0, escape = 0;
+    for (int turno = 0; nivel.enemigos->cantidad_activos && !escape; turno++) {
+        if(mapa.casillas[nivel.enemigos->posiciones->x + 1][nivel.enemigos->posiciones->y] == CAMINO &&
+           mapa.casillas[nivel.enemigos->posiciones->x][nivel.enemigos->posiciones->y +1] == CAMINO){
+            Mapa mapa1 = copiar_mapa(mapa);
+            Mapa mapa2 = copiar_mapa(mapa);
+            Nivel nivel1 = copiar_nivel(nivel);
+            Nivel nivel2 = copiar_nivel(nivel);
+        
+            simular_turno_derecha(&mapa1, &nivel1, posiciones_ataque, nro_ataques_efectivos); 
+            simular_turno_abajo(&mapa2, &nivel2, posiciones_ataque, nro_ataques_efectivos);
+
+            count += simular_todos_caminos(nivel1, mapa1);
+            count += simular_todos_caminos(nivel2, mapa2);
+            liberar_mapa(&mapa1);
+            liberar_mapa(&mapa2);
+            liberar_nivel(&nivel1);
+            liberar_nivel(&nivel2);
+            return count;
+        } else{
+            escape += simular_turno(&mapa, &nivel, posiciones_ataque, nro_ataques_efectivos);
+          }    
+    }
+    if(nivel.enemigos->cantidad_activos == 0){
+        return 0;
+    }else{
+        return 1;
+    }
+}
+
 
 static int mostrar_menu(DisposicionTorres estrategia_actual, char *ruta_nivel_actual) {
     int opcion = 3;
@@ -177,6 +219,7 @@ int main() {
                 sleep(3);
                 memoria_a_liberar = 1;
                 break;
+
             default:
                 if(memoria_a_liberar) {
                     liberar_simulacion(nivel, mapa);
